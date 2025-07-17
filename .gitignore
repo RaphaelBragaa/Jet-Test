@@ -1,0 +1,20 @@
+# Dependências node
+node_modules/
+
+# Build/output
+dist/
+build/
+
+# Diretórios temporários
+temp/
+tmp/
+.cache/
+.vite/
+
+# Excluir arquivo de configuração local
+.env
+
+
+
+
+
