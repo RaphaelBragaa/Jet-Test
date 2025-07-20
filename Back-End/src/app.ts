@@ -1,7 +1,6 @@
 import express from 'express'
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import cors from 'cors';
-import { connectToDatabase } from './database/db';
 
 dotenv.config();
 
@@ -10,13 +9,12 @@ server.use(cors())
       .use(express.json())
 
 
-connectToDatabase()
-  .then(() => {
-    server.listen(process.env.PORT, () => {
-      console.log(`Server On! Porta: ${process.env.PORT}`);
-    });
-  })
-  .catch(err => {
-    console.error('Falha na inicialização:', err);
-    process.exit(1);
-  });
+const PORT = process.env.PORT || 5000;
+
+server.get('/', (req, res) => {
+  res.send('Servidor ativo!');
+});
+
+server.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
