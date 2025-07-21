@@ -1,12 +1,17 @@
 import { Request, Response } from 'express';
 import { criarTarefaRepositorie, listarTarefasRepositorie } from '../repositories/tarefaRepositorie.ts';
 import { Tarefa, ListaDeTarefas } from '../models/tarefaModel.ts';
+import dayjs from 'dayjs';
 
 // Controlador para criar uma nova tarefa
 export async function criarTarefaController(req: Request, res: Response): Promise<Response> {
     if (!req.body) {
         return res.status(400).json({ error: 'Corpo da requisição inválido ou faltando atributos' });
+    } else if(dayjs(req.body.horarioExecucao).isBefore(dayjs())) {
+        return res.status(400).json({ error: 'Horário de execução não pode ser no passado' });
+
     }
+
     const tarefa: Tarefa = req.body;
     try{
         const novaTarefa = await criarTarefaRepositorie(tarefa);
