@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { criarTarefaController, listarTarefasController } from '../controllers/tarefa-controller';
+import { criarTarefaController, listarTarefasController } from '../controllers/tarefa-controller.ts';
 
 // Criando um roteador para as tarefas
 const router = Router();

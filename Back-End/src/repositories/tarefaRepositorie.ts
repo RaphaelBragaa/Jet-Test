@@ -1,5 +1,5 @@
-import { Tarefa, ListaDeTarefas } from '../models/tarefaModel';
-import { PrismaClient } from '@prisma/client'
+import { Tarefa, ListaDeTarefas } from '../models/tarefaModel.ts';
+import { PrismaClient } from '../generated/prisma/client.js';
 
 // Importando o PrismaClient para interagir com o banco de dados
 const prisma = new PrismaClient();

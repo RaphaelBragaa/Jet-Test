@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { criarTarefaRepositorie, listarTarefasRepositorie } from '../repositories/tarefaRepositorie';
-import { Tarefa, ListaDeTarefas } from '../models/tarefaModel';
+import { criarTarefaRepositorie, listarTarefasRepositorie } from '../repositories/tarefaRepositorie.ts';
+import { Tarefa, ListaDeTarefas } from '../models/tarefaModel.ts';
 
 // Controlador para criar uma nova tarefa
 export async function criarTarefaController(req: Request, res: Response): Promise<Response> {

@@ -1,8 +1,7 @@
 export interface Tarefa {
-  id: string;
   titulo: string;
   descricao: string;
-  horaExecucao: Date;
+  horarioExecucao: Date;
 }
 export interface ListaDeTarefas {
  tarefas: Tarefa[];

@@ -1,5 +1,5 @@
 import express from 'express'
-import tarefaRouter from './routers/tarefa-router';
+import tarefaRouter from './routers/tarefa-router.ts';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -9,7 +9,7 @@ dotenv.config();
 const server = express()
 server.use(cors())
       .use(express.json())
-      .use('/api', tarefaRouter);
+      .use('/', tarefaRouter);
 
 
 const PORT = process.env.PORT || 5000;
