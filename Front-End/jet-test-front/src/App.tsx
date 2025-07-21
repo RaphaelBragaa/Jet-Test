@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { TarefasService } from './services/tarefas';
+import type { Tarefa } from './services/tarefas';
+import React, { useEffect, useState } from 'react';
+import { BsPencilSquare, BsFillTrashFill, BsCheckSquareFill } from "react-icons/bs";
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tarefas, setTarefas] = useState<Tarefa[]>([]);
+
+  useEffect(() => {
+    TarefasService.ListTarefas()
+      .then((response) => {
+        setTarefas(response);
+        console.log("Tarefas listadas com sucesso:", response);
+      })
+      .catch((error) => {
+        console.error("Erro ao listar tarefas:", error);
+      });
+  }, [tarefas]);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="container-Tarefas">
+        <h1>Lista de Tarefas</h1>
+        <div className="card">
+          <div className="card-search">
+            {/* Barra de pesquisa para ser adicionada aqui */}
+          </div>
+          <div className="card-list">
+            {tarefas.length === 0 && (
+              <div>Nenhuma tarefa encontrada.</div>
+            )}
+            {tarefas.map((tarefa: Tarefa) => (
+              <div key={tarefa.id} className="card-list-item">
+                <div className="card-list-item-content">
+                  <h2>{tarefa.titulo}</h2>
+                  <p>{tarefa.descricao}</p>
+                  <span className="card-list-item-date">
+                  Horário: {new Date(tarefa.horarioExecucao).toLocaleString("pt-BR")}
+                  </span>
+                </div>
+                <div className="card-list-item-actions">
+                  <button><BsPencilSquare /></button>
+                  <button><BsCheckSquareFill /></button>
+                  <button><BsFillTrashFill /></button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
