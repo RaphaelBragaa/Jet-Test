@@ -6,8 +6,13 @@
 }
 
 body{
-  background-color: #040E08;
+  background: linear-gradient(90deg, #A3FF61, #67E8F9);
+  
 
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .logo {
@@ -44,15 +49,16 @@ body{
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
-  height: 100vh;
-  width: 100vh;
+  border-radius: 20px;
+  
 }
 
 .card {
   padding: 2em;
-  background: linear-gradient(90deg, rgb(193,255,209) 0%, rgb(185,241,255) 100%);
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 1.5em;
-  width: 80%;
+  max-width: 80%;
   margin: 2em auto;
   min-height: 15rem;
 }
@@ -67,13 +73,18 @@ body{
 
 .card-list-item {
   display: flex;
-  background: white;
-  text-align: left ;
+  flex-wrap: wrap;
+  background: linear-gradient(90deg, #A3FF61, #67E8F9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: left;
   justify-content: center;
   border-radius: 1em;
  padding: 1.5em;
-  width: 70%;
-  color:#040E08;
+ width: 100%;
+  max-width: 600px;
+  color:black;
+  box-sizing: border-box;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -94,6 +105,7 @@ body{
   button {
     margin-top: 0.5rem;
     background-color: #929191;
+    cursor: pointer;
   }
   button:hover {
     background-color: #646464;
