@@ -9,7 +9,6 @@ export async function criarTarefaController(req: Request, res: Response): Promis
         return res.status(400).json({ error: 'Corpo da requisição inválido ou faltando atributos' });
     } else if(dayjs(req.body.horarioExecucao).isBefore(dayjs())) {
         return res.status(400).json({ error: 'Horário de execução não pode ser no passado' });
-
     }
 
     const tarefa: Tarefa = req.body;

@@ -21,3 +21,5 @@ server.get('/', (req, res) => {
 server.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
+
+export default server;

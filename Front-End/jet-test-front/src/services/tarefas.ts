@@ -4,7 +4,6 @@ import axios from 'axios';
 const API_URL = "http://localhost:5000";
 
 export interface Tarefa {
-  id: string;
   titulo: string;
   descricao: string;
   horarioExecucao: Date;
