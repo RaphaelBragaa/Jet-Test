@@ -1,0 +1,49 @@
+# Versão do Docker Compose 
+version: '3.8'
+
+services:
+  # Serviço principal da API 
+  app:
+    # Instruções para a imagem Docker a partir do Dockerfile
+    build:
+      context: .              # Diretório do o Dockerfile
+      dockerfile: Dockerfile # Nome do Dockerfile
+    container_name: app-node # Nome do container
+
+    # Mapeia a porta 5000 do container para a porta 5000 do host
+    ports:
+      - "5000:5000"
+
+    # Este container só sobe após o Redis estar disponível
+    depends_on:
+      - redis
+
+    # Variáveis de ambiente
+    environment:
+      REDIS_HOST: redis       # Nome do serviço de Redis definido abaixo
+      REDIS_PORT: 6379        # Porta padrão do Redis
+
+    # Mapeia o diretório local para que as alterações no código sejam refletidas imediatamente
+    volumes:
+      - .:/src/usr/
+
+    # Reinicia o container automaticamente se ele parar
+    restart: unless-stopped
+
+  # Serviço de Redis usado para filas
+  redis:
+    image: redis:latest        # Usa a imagem oficial mais recente do Redis
+    container_name: redis      # Facilita para identificar o container
+    ports:
+      - "6379:6379"            # Mapeia porta padrão do Redis
+
+    # Volume Docker para persistência dos dados Redis
+    volumes:
+      - redis_data:/data
+
+    # Também reinicia exceto se for parado manualmente
+    restart: unless-stopped
+
+# Define volume para persistência dos dados do Redis
+volumes:
+  redis_data:
