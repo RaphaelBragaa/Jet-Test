@@ -8,6 +8,7 @@ import { BsPencilSquare, BsFillTrashFill, BsCheckSquareFill } from "react-icons/
 function App() {
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
 
+  // Efeito para listar as tarefas ao carregar o componente
   useEffect(() => {
     TarefasService.ListTarefas()
       .then((response) => {
@@ -17,22 +18,25 @@ function App() {
       .catch((error) => {
         console.error("Erro ao listar tarefas:", error);
       });
-  }, [tarefas]);
+  }, [tarefas]); // Para executar apenas uma vez ao montar o componente
 
   // Função para adicionar uma nova tarefa
   function CadastrarTarefa(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    event.preventDefault(); // Previne o comportamento padrão do formulário
+    // Obtém os valores dos campos do formulário
     const form = event.currentTarget;
     const titulo = form.elements[0] as HTMLInputElement;
     const descricao = form.elements[1] as HTMLTextAreaElement;
-    const horarioExecucao = form.elements[2] as HTMLInputElement;  
+    const horarioExecucao = form.elements[2] as HTMLInputElement; 
 
+    // Cria um objeto Tarefa com os valores dos campos
     const novaTarefa: Tarefa = {
       titulo: titulo.value,
       descricao: descricao.value,
       horarioExecucao: new Date(horarioExecucao.value),
     };
 
+    // Chama o serviço para criar a nova tarefa
     TarefasService.CriarTarefa(novaTarefa)
       .then((response) => {
         setTarefas([...tarefas, response]);
@@ -42,6 +46,7 @@ function App() {
         console.error("Erro ao criar tarefa:", error);
       });
   }
+
 
   return (
     <>
