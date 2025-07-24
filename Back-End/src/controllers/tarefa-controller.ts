@@ -6,7 +6,11 @@ import axios from 'axios';
 import { Queue, Worker, Job } from 'bullmq';
 import IORedis from 'ioredis';
 
-const connection = new IORedis();
+const connection = new IORedis({
+  host: 'localhost',
+  port: 6379,
+  maxRetriesPerRequest: null,
+});
 
 // Define a fila para notificações
 const notificacaoQueue = new Queue('notificacaoFila', { connection });

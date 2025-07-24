@@ -165,13 +165,7 @@ cd Front-End
 npm install
 ```
 
-2. Edite `.env` para apontar para a API:
-
-```
-VITE_API_URL=http://localhost:5000
-```
-
-3. Inicie o app:
+2. Inicie o app:
 
 ```sh
 npm run dev
